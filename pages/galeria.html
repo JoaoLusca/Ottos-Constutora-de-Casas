@@ -52,5 +52,15 @@
     <div class="footer-brand"><img src="../assets/images/brand/logo-ottos.svg" alt="OTTOS Construtora" width="685" height="222"><p>Arquitetura e construção residencial de alto padrão em Uberlândia, MG.</p></div>
     <div class="footer-nav"><div><small>NAVEGAÇÃO</small><a href="../index.html">Início</a><a href="../index.html#empresa">Empresa</a><a href="../index.html#servicos">Serviços</a><a href="../index.html#contato">Contato</a></div><div><small>CONTATO</small><a href="https://wa.me/5534999999999"><img src="../assets/icons/whatsapp-icon.svg" alt="">WhatsApp</a><a href="#"><img src="../assets/icons/instagram-icon.svg" alt="">Instagram</a></div></div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@beta/bundled/locomotive-scroll.min.js"></script>
+    <script>
+        const scroll = new LocomotiveScroll({
+            el: document.querySelector('#app'),
+            smooth: true,
+        });
+        /* Expõe instância para que o footer.js possa ouvir eventos */
+        window.LocomotiveScrollInstance = scroll;
+    </script>
 </body>
 </html>

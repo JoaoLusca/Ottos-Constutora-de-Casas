@@ -257,7 +257,15 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@beta/bundled/locomotive-scroll.min.js"></script>
+    <script>
+        const scroll = new LocomotiveScroll({
+            el: document.querySelector('#app'),
+            smooth: true,
+        });
+        /* Expõe instância para que o footer.js possa ouvir eventos */
+        window.LocomotiveScrollInstance = scroll;
+    </script>
   <script src="assets/js/main.js?v=10"></script>
 </body>
 </html>
