@@ -1571,3 +1571,128 @@ h2 em {
     font-size: clamp(44px, 13vw, 58px)
   }
 }
+/* =========================================================
+   SOBRE A OTTOS — storytelling editorial
+   ========================================================= */
+.about-page{background:#fff}
+.about-page .kicker.light{color:#bdeef1}
+
+.about-hero{position:relative;min-height:calc(92svh - var(--header-h));display:flex;align-items:flex-end;overflow:hidden;background:var(--dark);color:#fff}
+.about-hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 52%;filter:saturate(.92) contrast(1.02)}
+.about-hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,43,48,.92) 0%,rgba(0,43,48,.72) 38%,rgba(0,43,48,.18) 72%,rgba(0,43,48,.32) 100%)}
+.about-hero-inner{position:relative;z-index:2;width:min(1500px,100%);margin:0 auto;padding:clamp(96px,10vw,160px) 7vw clamp(80px,8vw,124px)}
+.about-hero-inner h1{max-width:980px;margin:18px 0 28px;font:600 clamp(62px,7.7vw,118px)/.88 var(--serif);letter-spacing:-.057em;color:#fff}
+.about-hero-inner h1 em{font-style:italic;color:#66e3e9}
+.about-hero-inner>p:last-child{max-width:720px;margin:0;font-size:15px;line-height:1.85;color:#e4f4f5}
+.about-hero-caption{position:absolute;z-index:2;right:4vw;bottom:34px;margin:0;writing-mode:vertical-rl;transform:rotate(180deg);font-size:8px;letter-spacing:.22em;color:rgba(255,255,255,.72)}
+
+.about-manifesto{padding:11vw 7vw 12vw;background:#fff}
+.about-manifesto>.kicker{margin-bottom:48px}
+.about-manifesto-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.72fr);gap:9vw;align-items:start}
+.about-manifesto h2{margin:0;font:600 clamp(56px,6vw,96px)/.93 var(--serif);letter-spacing:-.048em;color:var(--ink)}
+.about-manifesto h2 em{font-style:italic;color:var(--cyan)}
+.about-manifesto-grid>div:last-child{padding-top:18px;border-top:1px solid #bcd8da}
+.about-manifesto-grid p{margin:0 0 24px;font-size:15px;line-height:1.9;color:#547277}
+
+.about-chapter{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(420px,.94fr);min-height:88vh}
+.about-chapter-media{min-height:680px;overflow:hidden;background:#dcecee}
+.about-chapter-media img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
+.about-chapter-copy{position:relative;display:flex;flex-direction:column;justify-content:center;padding:9vw 8vw}
+.about-chapter-number{position:absolute;right:5vw;top:5vw;font:500 clamp(72px,8vw,136px)/1 var(--serif);letter-spacing:-.06em;color:rgba(0,125,137,.11)}
+.about-chapter-copy h2{position:relative;z-index:1;margin:16px 0 30px;font:600 clamp(48px,5vw,82px)/.94 var(--serif);letter-spacing:-.045em}
+.about-chapter-copy h2 em{font-style:italic;color:var(--cyan)}
+.about-chapter-copy>p:not(.kicker){position:relative;z-index:1;max-width:600px;margin:0 0 20px;font-size:14px;line-height:1.86;color:#55757a}
+.about-chapter-dark{background:var(--dark);color:#fff;grid-template-columns:minmax(420px,.94fr) minmax(0,1.06fr)}
+.about-chapter-dark .about-chapter-copy>p:not(.kicker){color:#d7ebed}
+.about-chapter-dark .about-chapter-number{color:rgba(113,230,235,.12)}
+.about-chapter-dark .about-chapter-media{order:2}
+.about-chapter-dark .about-chapter-copy{order:1}
+.about-chapter-media-tall img{object-position:center 44%}
+
+.about-principle{min-height:72vh;padding:12vw 7vw;display:flex;flex-direction:column;justify-content:center;background:#e7f8f9;color:var(--teal)}
+.about-principle-small{margin:0 0 28px;font-size:9px;letter-spacing:.24em;font-weight:700}
+.about-principle blockquote{margin:0;max-width:1320px;font:600 clamp(70px,10vw,170px)/.84 var(--serif);letter-spacing:-.065em}
+.about-principle blockquote em{font-style:italic;background:linear-gradient(110deg,var(--teal),var(--cyan) 58%,#73e7ed);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.about-belief{padding:12vw 7vw;background:#fff}
+.about-belief-intro{display:grid;grid-template-columns:.7fr 1.3fr;gap:7vw;align-items:end;margin-bottom:72px}
+.about-belief-intro h2{margin:0;font:600 clamp(58px,6.2vw,100px)/.91 var(--serif);letter-spacing:-.05em}
+.about-belief-intro h2 em{font-style:italic;color:var(--cyan)}
+.about-values{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #bad5d8;border-bottom:1px solid #bad5d8}
+.about-values article{min-height:320px;padding:30px 26px;border-right:1px solid #bad5d8}
+.about-values article:last-child{border-right:0}
+.about-values span{font-size:9px;letter-spacing:.18em;color:#6c9599}
+.about-values h3{margin:70px 0 18px;font:600 34px/1 var(--serif)}
+.about-values p{margin:0;font-size:13px;line-height:1.78;color:#5a777c}
+
+.about-closing{display:grid;grid-template-columns:minmax(400px,.9fr) minmax(0,1.1fr);background:var(--teal);color:#fff}
+.about-closing-media{min-height:720px;overflow:hidden}
+.about-closing-media img{width:100%;height:100%;display:block;object-fit:cover}
+.about-closing-copy{display:flex;flex-direction:column;justify-content:center;padding:9vw 8vw}
+.about-closing-copy h2{margin:16px 0 30px;font:600 clamp(52px,5.5vw,90px)/.92 var(--serif);letter-spacing:-.047em}
+.about-closing-copy h2 em{font-style:italic;color:#7aeaf0}
+.about-closing-copy>p:not(.kicker){max-width:620px;margin:0 0 20px;font-size:14px;line-height:1.86;color:#e3f5f6}
+.about-closing-copy .btn{margin-top:22px;align-self:flex-start}
+
+.about-next{padding:11vw 7vw 12vw;background:#fff}
+.about-next h2{max-width:1020px;margin:16px 0 42px;font:600 clamp(58px,6.5vw,105px)/.91 var(--serif);letter-spacing:-.05em}
+.about-next h2 em{font-style:italic;color:var(--cyan)}
+.about-next-actions{display:flex;align-items:center;gap:28px}
+
+@media(max-width:1100px){
+  .about-values{grid-template-columns:repeat(2,1fr)}
+  .about-values article:nth-child(2){border-right:0}
+  .about-values article:nth-child(-n+2){border-bottom:1px solid #bad5d8}
+}
+
+@media(max-width:900px){
+  .about-hero{min-height:78svh}
+  .about-hero-image{object-position:68% center}
+  .about-hero-overlay{background:linear-gradient(180deg,rgba(0,43,48,.16),rgba(0,43,48,.38) 34%,rgba(0,43,48,.91) 100%)}
+  .about-hero-inner{padding:18vw 6vw 12vw;align-self:flex-end}
+  .about-hero-inner h1{max-width:96%;font-size:clamp(50px,13vw,76px);line-height:.92;margin:14px 0 20px}
+  .about-hero-inner>p:last-child{max-width:96%;font-size:13px;line-height:1.72}
+  .about-hero-caption{display:none}
+
+  .about-manifesto{padding:20vw 6vw}
+  .about-manifesto>.kicker{margin-bottom:28px}
+  .about-manifesto-grid{grid-template-columns:1fr;gap:34px}
+  .about-manifesto h2{font-size:clamp(48px,13vw,72px)}
+  .about-manifesto-grid>div:last-child{padding-top:24px}
+  .about-manifesto-grid p{font-size:14px;line-height:1.78}
+
+  .about-chapter,.about-chapter-dark{grid-template-columns:1fr;min-height:0}
+  .about-chapter-media,.about-chapter-media-tall{order:1!important;min-height:72vw;max-height:620px}
+  .about-chapter-copy{order:2!important;padding:17vw 6vw 18vw}
+  .about-chapter-number{right:6vw;top:10vw;font-size:90px}
+  .about-chapter-copy h2{font-size:clamp(46px,12vw,68px);margin:14px 0 24px}
+  .about-chapter-copy>p:not(.kicker){font-size:13px;line-height:1.78}
+  .about-chapter-dark .about-chapter-media img{object-position:center 38%}
+
+  .about-principle{min-height:58svh;padding:20vw 6vw}
+  .about-principle blockquote{font-size:clamp(58px,16vw,104px);line-height:.87}
+
+  .about-belief{padding:20vw 6vw}
+  .about-belief-intro{grid-template-columns:1fr;gap:18px;margin-bottom:44px}
+  .about-belief-intro h2{font-size:clamp(50px,13vw,72px)}
+  .about-values{grid-template-columns:1fr}
+  .about-values article,.about-values article:nth-child(2){min-height:0;border-right:0;border-bottom:1px solid #bad5d8;padding:26px 0 30px}
+  .about-values article:last-child{border-bottom:0}
+  .about-values h3{margin:34px 0 14px;font-size:30px}
+
+  .about-closing{grid-template-columns:1fr}
+  .about-closing-media{min-height:78vw;max-height:620px}
+  .about-closing-copy{padding:18vw 6vw 20vw}
+  .about-closing-copy h2{font-size:clamp(48px,12.5vw,70px)}
+  .about-closing-copy>p:not(.kicker){font-size:13px;line-height:1.78}
+
+  .about-next{padding:20vw 6vw}
+  .about-next h2{font-size:clamp(50px,13vw,72px);margin-bottom:32px}
+  .about-next-actions{align-items:flex-start;flex-direction:column;gap:22px}
+}
+
+@media(max-width:560px){
+  .about-hero{min-height:74svh}
+  .about-hero-inner h1{font-size:clamp(45px,13.5vw,60px)}
+  .about-principle blockquote{font-size:clamp(52px,16.5vw,76px)}
+}
