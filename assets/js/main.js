@@ -14,13 +14,14 @@
 
   if (year) year.textContent = new Date().getFullYear();
 
-  /* Loader: long enough to feel intentional, without animating the logo itself. */
+  /* Loader — homepage only when the element exists. */
   const loaderStartedAt = performance.now();
-  const minimumLoaderTime = reduceMotion ? 700 : 2300;
+  const minimumLoaderTime = reduceMotion ? 500 : 1900;
   const hideLoader = () => {
     if (!loader || loader.dataset.closed === 'true') return;
     const remaining = Math.max(0, minimumLoaderTime - (performance.now() - loaderStartedAt));
     window.setTimeout(() => {
+      if (loader.dataset.closed === 'true') return;
       loader.dataset.closed = 'true';
       loader.classList.add('is-hidden');
       document.dispatchEvent(new CustomEvent('ottos:loader-hidden'));
@@ -28,9 +29,9 @@
   };
   if (document.readyState === 'complete') hideLoader();
   else window.addEventListener('load', hideLoader, { once: true });
-  window.setTimeout(hideLoader, 5200); // network-safe fallback
+  window.setTimeout(hideLoader, 5000);
 
-  /* Mobile menu is initialized first and never depends on GSAP/Locomotive. */
+  /* Shared mobile menu — works on every page without third-party libraries. */
   const initMobileMenu = () => {
     const menu = $('#mobileMenu');
     const toggles = $$('.menu-toggle');
@@ -47,19 +48,14 @@
     toggles.forEach(button => button.addEventListener('click', () => setMenu(true)));
     close?.addEventListener('click', () => setMenu(false));
     $$('a', menu).forEach(link => link.addEventListener('click', () => setMenu(false)));
-    document.addEventListener('keydown', event => { if (event.key === 'Escape') setMenu(false); });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') setMenu(false);
+    });
   };
   initMobileMenu();
 
-  /* Hero slideshow is CSS-driven.
-     This intentionally has no JS timer so it remains independent from GSAP,
-     Locomotive Scroll, browser timer throttling and prefers-reduced-motion JS state. */
-
-  const gsap = window.gsap || null;
-  const ScrollTrigger = window.ScrollTrigger || null;
-  if (gsap && ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
-
-  /* Header state: mobile uses native scroll only. Locomotive is desktop-only. */
+  /* Shared top -> floating header behavior. */
+  let loco = null;
   let headerVisible = false;
   const updateHeader = (y) => {
     const next = Number(y || 0) > 80;
@@ -70,158 +66,152 @@
     floatingHeader?.setAttribute('aria-hidden', String(!next));
   };
 
-  const initScroll = () => {
-    let loco = null;
-    const useLocomotive = !mobileQuery.matches && !reduceMotion && !!window.LocomotiveScroll && !!app;
-
-    if (useLocomotive) {
-      try {
-        loco = new window.LocomotiveScroll({
-          el: app,
-          smooth: true,
-          lerp: 0.085,
-          multiplier: 1,
-          smartphone: { smooth: false },
-          tablet: { smooth: false }
-        });
-        loco.on('scroll', event => {
-          updateHeader(event?.scroll?.y ?? 0);
-          if (ScrollTrigger) ScrollTrigger.update();
-        });
-      } catch (error) {
-        console.warn('[OTTOS] Locomotive Scroll não iniciou; usando scroll nativo.', error);
-        loco = null;
-      }
-    }
-
-    /* Native listener always exists. On mobile this is the authoritative scroll source. */
-    const onNativeScroll = () => {
-      if (!loco || mobileQuery.matches) updateHeader(window.scrollY || document.documentElement.scrollTop || 0);
-    };
-    window.addEventListener('scroll', onNativeScroll, { passive: true });
-    onNativeScroll();
-
-    if (loco && gsap && ScrollTrigger) {
-      try {
-        ScrollTrigger.scrollerProxy(app, {
-          scrollTop(value) {
-            if (arguments.length) {
-              loco.scrollTo(value, { duration: 0, disableLerp: true });
-              return;
-            }
-            return loco.scroll?.instance?.scroll?.y || 0;
-          },
-          getBoundingClientRect() { return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight }; },
-          pinType: app.style.transform ? 'transform' : 'fixed'
-        });
-        ScrollTrigger.addEventListener('refresh', () => loco.update());
-        window.setTimeout(() => ScrollTrigger.refresh(), 250);
-      } catch (error) {
-        console.warn('[OTTOS] Integração ScrollTrigger/Locomotive indisponível.', error);
-      }
-    }
-
-    return loco;
+  const onNativeScroll = () => {
+    if (loco && !mobileQuery.matches) return;
+    updateHeader(window.scrollY || document.documentElement.scrollTop || 0);
   };
+  window.addEventListener('scroll', onNativeScroll, { passive: true });
+  onNativeScroll();
 
-  const loco = initScroll();
-
-  /* Hero entrance animation. All other essential interactions remain independent. */
-  if (gsap && !reduceMotion) {
-    gsap.from('.hero-reveal', { y: 32, opacity: 0, stagger: 0.09, duration: 0.9, ease: 'power3.out', delay: 0.18 });
-  }
-
-  /* Robust Redacted Reveal without SplitText dependency. */
-  const buildWordSpans = (heading) => {
-    const textNodes = [];
-    const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT, {
-      acceptNode(node) {
-        if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-        if (node.parentElement?.closest('.reveal-word')) return NodeFilter.FILTER_REJECT;
-        return NodeFilter.FILTER_ACCEPT;
-      }
-    });
-    while (walker.nextNode()) textNodes.push(walker.currentNode);
-
-    textNodes.forEach(node => {
-      const parent = node.parentElement;
-      const computedColor = window.getComputedStyle(parent).color;
-      const frag = document.createDocumentFragment();
-      node.nodeValue.split(/(\s+)/).forEach(part => {
-        if (!part) return;
-        if (/^\s+$/.test(part)) {
-          frag.appendChild(document.createTextNode(part));
-          return;
+  /* Hero entrance — lightweight native animation. */
+  const playHeroEntrance = () => {
+    if (reduceMotion) return;
+    $$('.hero-reveal').forEach((el, index) => {
+      el.animate(
+        [
+          { opacity: 0, transform: 'translate3d(0,22px,0)' },
+          { opacity: 1, transform: 'translate3d(0,0,0)' }
+        ],
+        {
+          duration: 700,
+          delay: index * 70,
+          easing: 'cubic-bezier(.22,1,.36,1)',
+          fill: 'both'
         }
-        const word = document.createElement('span');
-        word.className = 'reveal-word';
-        word.style.setProperty('--word-color', computedColor);
-        const text = document.createElement('span');
-        text.className = 'reveal-word__text';
-        text.textContent = part;
-        const bar = document.createElement('span');
-        bar.className = 'reveal-word__bar';
-        bar.setAttribute('aria-hidden', 'true');
-        word.append(text, bar);
-        frag.appendChild(word);
-      });
-      node.parentNode.replaceChild(frag, node);
+      );
     });
-    return $$('.reveal-word', heading);
   };
+  document.addEventListener('ottos:loader-hidden', playHeroEntrance, { once: true });
+  if (!loader || loader.classList.contains('is-hidden')) playHeroEntrance();
 
-  const revealEntries = $$('.redacted-heading').map(heading => ({
-    heading,
-    words: buildWordSpans(heading),
-    done: false
-  }));
+  /* Hero slideshow: two decoded image nodes at a time. */
+  const initHeroSlideshow = () => {
+    const stage = $('[data-hero-slideshow]');
+    if (!stage) return;
+    const slots = $$('[data-hero-slot]', stage);
+    const total = Number(stage.dataset.total || 0);
+    if (slots.length < 2 || total < 2) return;
 
-  const revealHeading = (entry) => {
-    if (entry.done || !entry.words.length) return;
-    entry.done = true;
+    let outgoing = slots[0];
+    let incoming = slots[1];
+    let currentIndex = 0;
+    let timer = 0;
+    let stopped = false;
+    const holdTime = reduceMotion ? 7200 : 6100;
+    const fadeTime = reduceMotion ? 460 : (mobileQuery.matches ? 1250 : 1450);
 
-    if (gsap && !reduceMotion) {
-      const tl = gsap.timeline();
-      entry.words.forEach((word, i) => {
-        const bar = $('.reveal-word__bar', word);
-        const text = $('.reveal-word__text', word);
-        const color = word.style.getPropertyValue('--word-color') || 'currentColor';
-        tl.to(bar, { scaleX: 0, transformOrigin: 'right center', duration: 0.48, ease: 'power2.inOut' }, i * 0.13)
-          .to(text, { color, duration: 0.24, ease: 'power1.out' }, i * 0.13 + 0.16);
+    const pathFor = (index) => {
+      const num = String(index + 1).padStart(2, '0');
+      return mobileQuery.matches
+        ? `assets/images/projects/mobile/residencia-ottos-uberlandia-${num}-720.webp`
+        : `assets/images/projects/residencia-ottos-uberlandia-${num}.webp`;
+    };
+
+    const schedule = (delay = holdTime) => {
+      window.clearTimeout(timer);
+      if (!stopped && !document.hidden) timer = window.setTimeout(nextSlide, delay);
+    };
+
+    const loadInto = (img, src) => new Promise(resolve => {
+      let settled = false;
+      const finish = (ok) => {
+        if (settled) return;
+        settled = true;
+        img.removeEventListener('load', onLoad);
+        img.removeEventListener('error', onError);
+        resolve(ok);
+      };
+      const onLoad = () => finish(true);
+      const onError = () => finish(false);
+      img.addEventListener('load', onLoad, { once: true });
+      img.addEventListener('error', onError, { once: true });
+      img.src = src;
+      if (img.complete) queueMicrotask(() => finish(Boolean(img.naturalWidth)));
+      if (typeof img.decode === 'function') {
+        img.decode().then(() => finish(true)).catch(() => {
+          if (img.complete) finish(Boolean(img.naturalWidth));
+        });
+      }
+    });
+
+    async function nextSlide() {
+      if (stopped || document.hidden) return;
+      const nextIndex = (currentIndex + 1) % total;
+      incoming.classList.remove('is-active', 'is-leaving');
+      incoming.style.zIndex = '2';
+      const ready = await loadInto(incoming, pathFor(nextIndex));
+      if (!ready || stopped) {
+        incoming.style.zIndex = '';
+        schedule(1800);
+        return;
+      }
+
+      requestAnimationFrame(() => {
+        incoming.classList.add('is-active');
+        outgoing.classList.add('is-leaving');
       });
-    } else {
-      entry.words.forEach((word, i) => {
-        window.setTimeout(() => word.classList.add('is-revealed'), reduceMotion ? 0 : 140 + i * 130);
-      });
+
+      window.setTimeout(() => {
+        outgoing.classList.remove('is-active', 'is-leaving');
+        outgoing.removeAttribute('srcset');
+        outgoing.style.zIndex = '0';
+        incoming.style.zIndex = '1';
+        [outgoing, incoming] = [incoming, outgoing];
+        currentIndex = nextIndex;
+        schedule();
+      }, fadeTime + 80);
     }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) window.clearTimeout(timer);
+      else schedule(900);
+    }, { passive: true });
+    schedule(900);
   };
+  document.addEventListener('ottos:loader-hidden', initHeroSlideshow, { once: true });
+  if (!loader || loader.classList.contains('is-hidden')) initHeroSlideshow();
 
-  /* rAF viewport monitor works with both transformed desktop scrolling and native mobile scrolling. */
-  const monitorReveals = () => {
-    let pending = false;
-    for (const entry of revealEntries) {
-      if (entry.done) continue;
-      pending = true;
-      const rect = entry.heading.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.68 && rect.bottom > window.innerHeight * 0.08) revealHeading(entry);
-    }
-    if (pending) window.requestAnimationFrame(monitorReveals);
+  /* Subtle section motion implemented with browser-native APIs. */
+  const initSectionMotion = () => {
+    if (reduceMotion || !('IntersectionObserver' in window)) return;
+    const targets = [
+      ...$$('.statement-copy,.gallery-intro,.services-intro,.contact-head>p:last-child'),
+      ...$$('.service-card')
+    ];
+    if (!targets.length) return;
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const delay = el.classList.contains('service-card')
+          ? Math.min(180, $$('.service-card').indexOf(el) * 45)
+          : 0;
+        el.animate(
+          [
+            { opacity: 0, transform: 'translate3d(0,24px,0)' },
+            { opacity: 1, transform: 'translate3d(0,0,0)' }
+          ],
+          { duration: 680, delay, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'both' }
+        );
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(el => observer.observe(el));
   };
-  window.requestAnimationFrame(monitorReveals);
+  initSectionMotion();
 
-  /* Secondary GSAP scroll animations are desktop-enhancements only. */
-  if (gsap && ScrollTrigger && loco && !reduceMotion) {
-    const scroller = app;
-    $$('.statement-copy,.gallery-intro,.services-intro,.contact-head>p:last-child').forEach(el => {
-      gsap.from(el, { y: 28, opacity: 0, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: el, scroller, start: 'top 88%' } });
-    });
-    $$('.service-card').forEach((el, i) => {
-      gsap.from(el, { y: 42, opacity: 0, duration: 0.8, delay: i * 0.06, ease: 'power3.out', scrollTrigger: { trigger: el, scroller, start: 'top 88%' } });
-    });
-    gsap.to('.breath-word', { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '.breath', scroller, start: 'top bottom', end: 'bottom top', scrub: true } });
-  }
-
-  /* Desktop accordion. Touch devices keep their horizontal swipe carousel. */
+  /* Desktop gallery accordion. */
   if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
     $$('.gallery-item').forEach(item => {
       item.addEventListener('mouseenter', () => {
@@ -231,24 +221,7 @@
     });
   }
 
-  /* Magnetic buttons are desktop-only and optional. */
-  if (gsap && window.matchMedia('(hover:hover) and (pointer:fine)').matches && !reduceMotion) {
-    $$('.btn').forEach(btn => {
-      btn.addEventListener('mousemove', event => {
-        const rect = btn.getBoundingClientRect();
-        gsap.to(btn, {
-          x: (event.clientX - rect.left - rect.width / 2) * 0.05,
-          y: (event.clientY - rect.top - rect.height / 2) * 0.08,
-          duration: 0.25,
-          ease: 'power2.out',
-          overwrite: true
-        });
-      });
-      btn.addEventListener('mouseleave', () => gsap.to(btn, { x: 0, y: 0, duration: 0.35, ease: 'power3.out', overwrite: true }));
-    });
-  }
-
-  /* Smooth internal links on mobile/native scroll; Locomotive handles desktop. */
+  /* Internal links: use Locomotive only if it actually started. */
   $$('a[href^="#"]').forEach(link => {
     link.addEventListener('click', event => {
       const id = link.getAttribute('href');
@@ -262,6 +235,55 @@
     });
   });
 
-  /* If viewport crosses the desktop/mobile breakpoint during development, refresh safely. */
+  /* Optional desktop smooth scrolling. */
+  const loadScript = (src, timeout = 5000) => new Promise((resolve, reject) => {
+    let settled = false;
+    const script = document.createElement('script');
+    const timer = window.setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      script.remove();
+      reject(new Error(`Timeout ao carregar ${src}`));
+    }, timeout);
+    script.src = src;
+    script.async = true;
+    script.addEventListener('load', () => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timer);
+      resolve();
+    }, { once: true });
+    script.addEventListener('error', () => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timer);
+      reject(new Error(`Falha ao carregar ${src}`));
+    }, { once: true });
+    document.head.appendChild(script);
+  });
+
+  const initDesktopSmoothScroll = async () => {
+    if (mobileQuery.matches || reduceMotion || !app) return;
+    try {
+      await loadScript('https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js');
+      if (!window.LocomotiveScroll) return;
+      loco = new window.LocomotiveScroll({
+        el: app,
+        smooth: true,
+        lerp: 0.085,
+        multiplier: 1,
+        smartphone: { smooth: false },
+        tablet: { smooth: false }
+      });
+      loco.on('scroll', event => updateHeader(event?.scroll?.y ?? 0));
+      requestAnimationFrame(() => loco?.update());
+      window.setTimeout(() => loco?.update(), 240);
+    } catch (error) {
+      console.warn('[OTTOS] Smooth scroll indisponível; usando scroll nativo.', error);
+      loco = null;
+    }
+  };
+  initDesktopSmoothScroll();
+
   mobileQuery.addEventListener?.('change', () => window.location.reload());
 })();

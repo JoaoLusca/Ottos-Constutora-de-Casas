@@ -1,21 +1,28 @@
-# OTTOS Construtora — estrutura do projeto
+# OTTOS Construtora — site institucional
 
-## Pastas
-- `index.html`: homepage.
-- `pages/`: páginas internas. A galeria já está em `pages/galeria.html`; futuras páginas (empresa, serviços, blog etc.) devem entrar aqui.
+## Estrutura
+- `index.html`: Home.
+- `pages/galeria.html`: página interna de galeria.
 - `assets/css/main.css`: estilos globais e responsivos.
-- `assets/js/main.js`: interações, GSAP, scroll, menu, header e slideshow.
-- `assets/images/brand/`: marca OTTOS.
-- `assets/images/projects/`: fotografias de projetos, renomeadas de forma descritiva para organização e SEO.
-- `assets/images/seo/`: imagens para compartilhamento/social.
-- `assets/icons/`: ícones vetorizados em SVG a partir dos arquivos fornecidos.
+- `assets/js/main.js`: menu, headers, slideshow, scroll e interações leves.
+- `assets/images/`: identidade, projetos e imagens de SEO.
+- `assets/icons/`: ícones SVG.
 
-## SEO antes da publicação
-O site já possui title, description, Open Graph, Twitter Card, dados estruturados Schema.org, geolocalização de Uberlândia/MG, hierarquia semântica e alt texts.
+## Padrão obrigatório para páginas internas
+Todas as páginas internas devem utilizar o mesmo shell visual da Home:
+1. `site-header-top`;
+2. `site-header-float`;
+3. `mobile-menu`;
+4. conteúdo dentro de `#app`;
+5. footer global;
+6. botão flutuante de WhatsApp.
 
-Antes de publicar, substitua os contatos provisórios e confirme o domínio definitivo. Depois, prefira trocar os `canonical` e URLs de Open Graph por URLs absolutas do domínio de produção e gerar um `sitemap.xml` com todas as páginas definitivas.
+A página `pages/galeria.html` já serve como referência desse padrão. Em novas páginas, devem mudar apenas o conteúdo de `<main>`, SEO específico da página e os caminhos relativos necessários.
+
+## Interações
+O projeto usa APIs nativas do navegador para as animações essenciais. O smooth scroll desktop é uma melhoria progressiva: se a biblioteca externa não carregar, o site continua totalmente funcional com rolagem nativa.
 
 
-## v10 — correção do slideshow da hero
-
-O slideshow da hero passou a ser controlado inteiramente por CSS, sem `setInterval`. Isso elimina a condição anterior que desativava o slideshow quando `prefers-reduced-motion` estava ativo e também reduz a dependência de timers JavaScript. As 11 imagens fazem crossfade contínuo a cada 6,5 segundos.
+## v14
+- Corrigido o styling da hero da página Galeria em desktop e mobile.
+- Footer compartilhado ficou mais compacto verticalmente, preservando conteúdo e identidade visual.

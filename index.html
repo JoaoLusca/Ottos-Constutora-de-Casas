@@ -27,9 +27,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/images/projects/residencia-ottos-uberlandia-01.webp" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/main.css?v=10">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/images/projects/residencia-ottos-uberlandia-01.webp" imagesrcset="assets/images/projects/mobile/residencia-ottos-uberlandia-01-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-01.webp 1080w" imagesizes="100vw" fetchpriority="high">
+  <link rel="stylesheet" href="assets/css/main.css?v=14">
 
   <script type="application/ld+json">
   {
@@ -117,18 +117,9 @@
   <div id="app" data-scroll-container>
     <main>
       <section class="hero panel" id="home" aria-labelledby="hero-title" data-scroll-section>
-        <div class="hero-slideshow" aria-hidden="true">
-          <img class="hero-slide is-active" src="assets/images/projects/residencia-ottos-uberlandia-01.webp" alt="" width="1080" height="1080" fetchpriority="high">
-          <img class="hero-slide" src="assets/images/projects/residencia-ottos-uberlandia-02.webp" alt="" width="1080" height="924">
-          <img class="hero-slide" src="assets/images/projects/residencia-ottos-uberlandia-03.webp" alt="" width="828" height="486">
-          <img class="hero-slide" src="assets/images/projects/residencia-ottos-uberlandia-04.webp" alt="" width="828" height="828">
-          <img class="hero-slide" src="assets/images/projects/residencia-ottos-uberlandia-05.webp" alt="" width="828" height="828">
-          <img class="hero-slide" src="assets/images/projects/residencia-ottos-uberlandia-06.webp" alt="" width="1080" height="1440">
-          <img class="hero-slide" src="assets/images/projects/residencia-ottos-uberlandia-07.webp" alt="" width="1080" height="1440">
-          <img class="hero-slide" src="assets/images/projects/residencia-ottos-uberlandia-08.webp" alt="" width="1080" height="1440">
-          <img class="hero-slide" src="assets/images/projects/residencia-ottos-uberlandia-09.webp" alt="" width="1080" height="1440">
-          <img class="hero-slide" src="assets/images/projects/residencia-ottos-uberlandia-10.webp" alt="" width="1080" height="1440">
-          <img class="hero-slide" src="assets/images/projects/residencia-ottos-uberlandia-11.webp" alt="" width="828" height="1030">
+        <div class="hero-slideshow" data-hero-slideshow data-total="11" aria-hidden="true">
+          <img class="hero-slide is-active" data-hero-slot="a" src="assets/images/projects/residencia-ottos-uberlandia-01.webp" srcset="assets/images/projects/mobile/residencia-ottos-uberlandia-01-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-01.webp 1080w" sizes="100vw" alt="" width="1080" height="1080" fetchpriority="high" decoding="async">
+          <img class="hero-slide" data-hero-slot="b" alt="" width="1080" height="1080" decoding="async">
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-inner">
@@ -148,7 +139,7 @@
         <div class="statement-grid">
           <div>
             <p class="kicker light">A OTTOS</p>
-            <h2 class="redacted-heading" id="empresa-title">O luxo de ter<br><em>intenção.</em></h2>
+            <h2 id="empresa-title">O luxo de ter<br><em>intenção.</em></h2>
           </div>
           <div class="statement-copy">
             <p>Construir para nós não é preencher metros quadrados. É interpretar um estilo de vida, organizar luz, matéria, escala e permanência — e transformar tudo isso em um endereço que tenha identidade.</p>
@@ -162,23 +153,23 @@
         <div class="gallery-head">
           <div>
             <p class="kicker">02 — PORTFÓLIO</p>
-            <h2 class="redacted-heading" id="galeria-title">Arquitetura para<br><em>ser vivida.</em></h2>
+            <h2 id="galeria-title">Arquitetura para<br><em>ser vivida.</em></h2>
           </div>
           <p class="gallery-intro">Uma seleção real de residências, interiores e áreas de lazer que traduzem a assinatura visual da OTTOS.</p>
         </div>
 
         <div class="accordion-gallery" aria-label="Galeria de projetos OTTOS">
-          <article class="gallery-item active"><img src="assets/images/projects/residencia-ottos-uberlandia-01.webp" alt="Fachada de residência contemporânea com volumes brancos, iluminação cênica e paisagismo" width="1080" height="1080" loading="lazy"><div class="gallery-label"><span>01</span><div><strong>Residência OTTOS 01</strong><small>Arquitetura residencial</small></div></div></article>
-          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-02.webp" alt="Fachada de casa contemporânea com madeira, vidro e volumes geométricos" width="1080" height="924" loading="lazy"><div class="gallery-label"><span>02</span><div><strong>Residência OTTOS 02</strong><small>Arquitetura residencial</small></div></div></article>
-          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-03.webp" alt="Residência contemporânea com garagem coberta, iluminação e paisagismo" width="828" height="486" loading="lazy"><div class="gallery-label"><span>03</span><div><strong>Residência OTTOS 03</strong><small>Arquitetura residencial</small></div></div></article>
-          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-04.webp" alt="Fachada frontal de residência contemporânea com madeira e paisagismo tropical" width="828" height="828" loading="lazy"><div class="gallery-label"><span>04</span><div><strong>Residência OTTOS 04</strong><small>Arquitetura residencial</small></div></div></article>
-          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-05.webp" alt="Residência de alto padrão com fachada em madeira e linhas horizontais" width="828" height="828" loading="lazy"><div class="gallery-label"><span>05</span><div><strong>Residência OTTOS 05</strong><small>Arquitetura residencial</small></div></div></article>
-          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-06.webp" alt="Área externa de residência com piscina, deck e fachada em madeira" width="1080" height="1440" loading="lazy"><div class="gallery-label"><span>06</span><div><strong>Residência OTTOS 06</strong><small>Área de lazer</small></div></div></article>
-          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-07.webp" alt="Área de piscina de residência contemporânea com fachada branca e grandes aberturas" width="1080" height="1440" loading="lazy"><div class="gallery-label"><span>07</span><div><strong>Residência OTTOS 07</strong><small>Área de lazer</small></div></div></article>
-          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-08.webp" alt="Interior integrado com escada em madeira, sala e vista para área externa" width="1080" height="1440" loading="lazy"><div class="gallery-label"><span>08</span><div><strong>Residência OTTOS 08</strong><small>Interiores</small></div></div></article>
-          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-09.webp" alt="Cozinha gourmet integrada com ilha central e marcenaria contemporânea" width="1080" height="1440" loading="lazy"><div class="gallery-label"><span>09</span><div><strong>Residência OTTOS 09</strong><small>Interiores</small></div></div></article>
-          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-10.webp" alt="Sala de jantar integrada à cozinha e à piscina em residência contemporânea" width="1080" height="1440" loading="lazy"><div class="gallery-label"><span>10</span><div><strong>Residência OTTOS 10</strong><small>Interiores</small></div></div></article>
-          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-11.webp" alt="Piscina com deck em madeira e paisagismo em residência contemporânea" width="828" height="1030" loading="lazy"><div class="gallery-label"><span>11</span><div><strong>Residência OTTOS 11</strong><small>Área de lazer</small></div></div></article>
+          <article class="gallery-item active"><img src="assets/images/projects/residencia-ottos-uberlandia-01.webp" srcset="assets/images/projects/mobile/residencia-ottos-uberlandia-01-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-01.webp 1080w" sizes="(max-width: 900px) 87vw, 55vw" decoding="async" fetchpriority="low" alt="Fachada de residência contemporânea com volumes brancos, iluminação cênica e paisagismo" width="1080" height="1080" loading="lazy"><div class="gallery-label"><span>01</span><div><strong>Residência OTTOS 01</strong><small>Arquitetura residencial</small></div></div></article>
+          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-02.webp" srcset="assets/images/projects/mobile/residencia-ottos-uberlandia-02-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-02.webp 1080w" sizes="(max-width: 900px) 87vw, 55vw" decoding="async" fetchpriority="low" alt="Fachada de casa contemporânea com madeira, vidro e volumes geométricos" width="1080" height="924" loading="lazy"><div class="gallery-label"><span>02</span><div><strong>Residência OTTOS 02</strong><small>Arquitetura residencial</small></div></div></article>
+          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-03.webp" srcset="assets/images/projects/mobile/residencia-ottos-uberlandia-03-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-03.webp 828w" sizes="(max-width: 900px) 87vw, 55vw" decoding="async" fetchpriority="low" alt="Residência contemporânea com garagem coberta, iluminação e paisagismo" width="828" height="486" loading="lazy"><div class="gallery-label"><span>03</span><div><strong>Residência OTTOS 03</strong><small>Arquitetura residencial</small></div></div></article>
+          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-04.webp" srcset="assets/images/projects/mobile/residencia-ottos-uberlandia-04-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-04.webp 828w" sizes="(max-width: 900px) 87vw, 55vw" decoding="async" fetchpriority="low" alt="Fachada frontal de residência contemporânea com madeira e paisagismo tropical" width="828" height="828" loading="lazy"><div class="gallery-label"><span>04</span><div><strong>Residência OTTOS 04</strong><small>Arquitetura residencial</small></div></div></article>
+          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-05.webp" srcset="assets/images/projects/mobile/residencia-ottos-uberlandia-05-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-05.webp 828w" sizes="(max-width: 900px) 87vw, 55vw" decoding="async" fetchpriority="low" alt="Residência de alto padrão com fachada em madeira e linhas horizontais" width="828" height="828" loading="lazy"><div class="gallery-label"><span>05</span><div><strong>Residência OTTOS 05</strong><small>Arquitetura residencial</small></div></div></article>
+          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-06.webp" srcset="assets/images/projects/mobile/residencia-ottos-uberlandia-06-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-06.webp 1080w" sizes="(max-width: 900px) 87vw, 55vw" decoding="async" fetchpriority="low" alt="Área externa de residência com piscina, deck e fachada em madeira" width="1080" height="1440" loading="lazy"><div class="gallery-label"><span>06</span><div><strong>Residência OTTOS 06</strong><small>Área de lazer</small></div></div></article>
+          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-07.webp" srcset="assets/images/projects/mobile/residencia-ottos-uberlandia-07-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-07.webp 1080w" sizes="(max-width: 900px) 87vw, 55vw" decoding="async" fetchpriority="low" alt="Área de piscina de residência contemporânea com fachada branca e grandes aberturas" width="1080" height="1440" loading="lazy"><div class="gallery-label"><span>07</span><div><strong>Residência OTTOS 07</strong><small>Área de lazer</small></div></div></article>
+          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-08.webp" srcset="assets/images/projects/mobile/residencia-ottos-uberlandia-08-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-08.webp 1080w" sizes="(max-width: 900px) 87vw, 55vw" decoding="async" fetchpriority="low" alt="Interior integrado com escada em madeira, sala e vista para área externa" width="1080" height="1440" loading="lazy"><div class="gallery-label"><span>08</span><div><strong>Residência OTTOS 08</strong><small>Interiores</small></div></div></article>
+          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-09.webp" srcset="assets/images/projects/mobile/residencia-ottos-uberlandia-09-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-09.webp 1080w" sizes="(max-width: 900px) 87vw, 55vw" decoding="async" fetchpriority="low" alt="Cozinha gourmet integrada com ilha central e marcenaria contemporânea" width="1080" height="1440" loading="lazy"><div class="gallery-label"><span>09</span><div><strong>Residência OTTOS 09</strong><small>Interiores</small></div></div></article>
+          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-10.webp" srcset="assets/images/projects/mobile/residencia-ottos-uberlandia-10-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-10.webp 1080w" sizes="(max-width: 900px) 87vw, 55vw" decoding="async" fetchpriority="low" alt="Sala de jantar integrada à cozinha e à piscina em residência contemporânea" width="1080" height="1440" loading="lazy"><div class="gallery-label"><span>10</span><div><strong>Residência OTTOS 10</strong><small>Interiores</small></div></div></article>
+          <article class="gallery-item"><img src="assets/images/projects/residencia-ottos-uberlandia-11.webp" srcset="assets/images/projects/mobile/residencia-ottos-uberlandia-11-720.webp 720w, assets/images/projects/residencia-ottos-uberlandia-11.webp 828w" sizes="(max-width: 900px) 87vw, 55vw" decoding="async" fetchpriority="low" alt="Piscina com deck em madeira e paisagismo em residência contemporânea" width="828" height="1030" loading="lazy"><div class="gallery-label"><span>11</span><div><strong>Residência OTTOS 11</strong><small>Área de lazer</small></div></div></article>
         </div>
 
         <div class="gallery-actions">
@@ -188,7 +179,7 @@
 
       <section class="services panel" id="servicos" aria-labelledby="servicos-title" data-scroll-section>
         <div class="services-top">
-          <div><p class="kicker">03 — SERVIÇOS</p><h2 class="redacted-heading" id="servicos-title">Do primeiro traço<br>à <em>última entrega.</em></h2></div>
+          <div><p class="kicker">03 — SERVIÇOS</p><h2 id="servicos-title">Do primeiro traço<br>à <em>última entrega.</em></h2></div>
           <p class="services-intro">Uma experiência conduzida por uma única visão: fazer bem, com método, precisão e menos ruído durante a obra.</p>
         </div>
         <div class="services-track">
@@ -206,7 +197,7 @@
 
       <section class="blog panel" id="blog" aria-labelledby="blog-title" data-scroll-section>
         <div class="blog-grid">
-          <div><p class="kicker light">04 — JOURNAL OTTOS</p><h2 class="redacted-heading" id="blog-title">Boas casas<br>começam com<br><em>boas ideias.</em></h2></div>
+          <div><p class="kicker light">04 — JOURNAL OTTOS</p><h2 id="blog-title">Boas casas<br>começam com<br><em>boas ideias.</em></h2></div>
           <div class="blog-side"><p>Arquitetura, construção, materiais, tendências e decisões práticas para quem quer construir uma casa de alto padrão em Uberlândia.</p><a class="btn btn-light" href="#contato">Acessar o blog <img class="btn-icon" src="assets/icons/arrow-top-right-icon.svg" alt=""></a></div>
         </div>
         <div class="fake-posts">
@@ -219,7 +210,7 @@
       <section class="contact panel" id="contato" aria-labelledby="contato-title" data-scroll-section>
         <div class="contact-head">
           <p class="kicker">05 — CONTATO</p>
-          <h2 class="redacted-heading" id="contato-title">Seu próximo endereço<br>pode começar <em>aqui.</em></h2>
+          <h2 id="contato-title">Seu próximo endereço<br>pode começar <em>aqui.</em></h2>
           <p>Conte brevemente o que você está planejando. A equipe OTTOS entra em contato para entender o projeto, o terreno e os próximos passos.</p>
         </div>
         <div class="contact-grid">
@@ -254,9 +245,7 @@
   </div>
 
   <a class="whatsapp-float" href="https://wa.me/5534999999999" target="_blank" rel="noopener noreferrer" aria-label="Conversar com a OTTOS pelo WhatsApp"><img src="assets/icons/whatsapp-icon.svg" alt=""></a>
-
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/main.js?v=14"></script>
   <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@beta/bundled/locomotive-scroll.min.js"></script>
     <script>
         const scroll = new LocomotiveScroll({
@@ -266,6 +255,5 @@
         /* Expõe instância para que o footer.js possa ouvir eventos */
         window.LocomotiveScrollInstance = scroll;
     </script>
-  <script src="assets/js/main.js?v=10"></script>
 </body>
 </html>
