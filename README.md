@@ -26,3 +26,14 @@ O projeto usa APIs nativas do navegador para as animações essenciais. O smooth
 ## v14
 - Corrigido o styling da hero da página Galeria em desktop e mobile.
 - Footer compartilhado ficou mais compacto verticalmente, preservando conteúdo e identidade visual.
+
+
+## Páginas internas
+
+- `pages/sobre.html` — história e posicionamento da OTTOS.
+- `pages/galeria.html` — portfólio completo.
+- `pages/servicos.html` — jornada completa de projeto, aprovações e construção residencial.
+
+
+## Navegação
+Os links do header, menu mobile e footer usam páginas dedicadas: `index.html`, `pages/sobre.html`, `pages/galeria.html`, `pages/servicos.html`, `pages/blog.html` e `pages/contato.html`. Blog e Contato estão como páginas-base temporárias até o desenvolvimento completo.
