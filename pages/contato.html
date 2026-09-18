@@ -238,6 +238,15 @@
         window.open(url, '_blank', 'noopener,noreferrer');
       });
     })();
-  </script>
+  </script>]
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@beta/bundled/locomotive-scroll.min.js"></script>
+    <script>
+        const scroll = new LocomotiveScroll({
+            el: document.querySelector('#app'),
+            smooth: true,
+        });
+        /* Expõe instância para que o footer.js possa ouvir eventos */
+        window.LocomotiveScrollInstance = scroll;
+    </script>
 </body>
 </html>
